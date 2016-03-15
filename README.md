@@ -4,6 +4,7 @@ Embed media via oEmbed or openGraph
 
 # Example of using the embedable code to fetch and render a uri
 
+```javascript
 // Require the embedable library
 var Embedable = require('embedable');
 
@@ -21,3 +22,4 @@ var html = data.then(function(data) {
     as: 'photo'
   });
 });
+```
