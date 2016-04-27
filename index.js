@@ -163,6 +163,12 @@ _.extend(Embed.prototype, {
 
     opts = opts || {};
 
+    // resolve entry promise
+    if (entry && typeof entry.then === 'function') {
+      return entry.then(function(data) {
+        return this.render(data);
+      });
+    }
     // if entry is an array of entries
     if (Array.isArray(entry)) {
       return when.map(entry, function(_entry) {
