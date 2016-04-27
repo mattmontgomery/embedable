@@ -154,7 +154,7 @@ _.extend(Provider.prototype, {
     // wrap in block tag
     if (out && typeof out === 'string' && opts.block) {
       if (opts.as !== 'link') {
-        style = entry.inline && entry.inline.style || opts.style;
+        style = opts.style;
       }
       out = '<div class="embed-block'
         + (style ? ' embed-' + style : '')
