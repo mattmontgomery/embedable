@@ -16,6 +16,37 @@ module.exports = [
   }),
 
   Provider.extend({
+    name: 'reddit',
+    type: 'rich',
+    uri: "reddit.com/r",
+    script: '//embed.redditmedia.com/widgets/platform.js',
+    fetch: function(uri, parts) {
+      return this.fetchGraph(uri).then(function(data) {
+        var title = data.title || '';
+        var parts = title.match(/^(.*)? • (.*)$/);
+
+        if (parts) {
+          data.title = parts[1];
+          data.sub_path = parts[2];
+          data.sub_title = parts[2].replace(/^\/r\//, '');
+        }
+        data.card_time = Math.floor(new Date() / 1000);
+
+        return data;
+      });
+    },
+    asEmbed: function(entry) {
+      var data = entry.data;
+
+      return '<blockquote class="reddit-card" data-card-created="' + data.card_time + '">'
+        + '<a href="' + entry.uri + '?ref=share&ref_source=embed">' + data.title  + '</a>'
+        + ' from <a href="http://www.reddit.com' + data.sub_path + '">' 
+        + data.sub_title + '</a></blockquote>'
+        + this.asScript();
+    }
+  }),
+
+  Provider.extend({
     name: 'rdio.com',
     type: "rich",
     uri: "rdio\\.com/(people|artist)/[^#?/]+/(playlists|album)/.+$",
