@@ -54,10 +54,28 @@ describe('Instance Methods', function() {
 describe('Fetch Method', function() {
 
   it('Is able to fetch from youtube', function() {
-    return embed.fetch('https://www.youtube.com/watch?v=azYO-P181JQ').then(function(data) {
+    return embed.fetch('http://imgur.com/gallery/B2r7RsF')
+    .then(function(data) {
       console.log(data);
-      assert.typeOf(data, 'object');
+      console.log("----------------------------------------");
+      return embed.render(data);
+    })
+    .then(function(html) {
+      console.log(html);
+      assert.typeOf(html, 'string');
     });
   });
+
+  // it('Is able to fetch from pinterest', function() {
+  //   return embed.fetch('https://www.pinterest.com/pin/417708934164289675/')
+  //   .then(function(data) {
+  //     console.log(data);
+  //     return embed.render(data);
+  //   })
+  //   .then(function(html) {
+  //     console.log(html);
+  //     assert.typeOf(html, 'string');
+  //   });
+  // });
 
 });
