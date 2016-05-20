@@ -165,6 +165,31 @@ module.exports = [
   }),
 
   Provider.extend({
+    name: 'tumblr',
+    type: 'rich',
+    uri: "tumblr.com/post/(.+)$",
+    script: '//secure.assets.tumblr.com/post.js',
+    fetch: function(uri, parts) {
+      return when.all([
+        this.fetchGraph(uri),
+        this.fetchEmbed(uri, {
+          api: 'https://www.tumblr.com/oembed/1.0'
+        })
+      ])
+      .then(function(data) {
+        var out = _.omit(_.extend(data[0], data[1]), [
+          'embed_src', 'embed_width'
+        ]);
+
+        if (out.embed_html) {
+          out.embed_html = out.embed_html.replace(/<script.*?<\/script>/, '');
+        }
+        return out;
+      });
+    }
+  }),
+
+  Provider.extend({
     name: "twitter",
     type: "rich",
     uri: "//twitter\\.com/(?:#!)?[^#?/]+/status/.+$",

@@ -54,7 +54,7 @@ describe('Instance Methods', function() {
 describe('Fetch Method', function() {
 
   it('Is able to fetch from youtube', function() {
-    return embed.fetch('http://imgur.com/gallery/B2r7RsF')
+    return embed.fetch('http://kushandwizdom.tumblr.com/post/144646137438')
     .then(function(data) {
       console.log(data);
       console.log("----------------------------------------");
