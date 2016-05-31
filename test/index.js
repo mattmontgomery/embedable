@@ -53,8 +53,21 @@ describe('Instance Methods', function() {
 
 describe('Fetch Method', function() {
 
-  it('Is able to fetch from youtube', function() {
-    return embed.fetch('https://www.reddit.com/r/todayilearned/comments/4k9f47/til_hocus_pocus_may_have_been_coined_by/')
+  //  it('Is able to fetch from imgur', function() {
+  //   return embed.fetch('http://imgur.com/gallery/wz49SF8')
+  //   .then(function(data) {
+  //     console.log(data);
+  //     console.log("----------------------------------------");
+  //     return embed.render(data);
+  //   })
+  //   .then(function(html) {
+  //     console.log(html);
+  //     assert.typeOf(html, 'string');
+  //   });
+  // });
+
+  it('Is able to fetch from reddit comment', function() {
+    return embed.fetch('https://www.reddit.com/r/todayilearned/comments/4lbdfl/til_louis_armstrong_asked_richard_nixon_to_carry/')
     .then(function(data) {
       console.log(data);
       console.log("----------------------------------------");
@@ -65,6 +78,32 @@ describe('Fetch Method', function() {
       assert.typeOf(html, 'string');
     });
   });
+
+  it('Is able to fetch from reddit comment', function() {
+    return embed.fetch('https://www.reddit.com/r/todayilearned/comments/4lbdfl/til_louis_armstrong_asked_richard_nixon_to_carry/d3m86v8')
+    .then(function(data) {
+      console.log(data);
+      console.log("----------------------------------------");
+      return embed.render(data);
+    })
+    .then(function(html) {
+      console.log(html);
+      assert.typeOf(html, 'string');
+    });
+  });
+
+  // it('Is able to fetch from youtube', function() {
+  //   return embed.fetch('https://www.reddit.com/r/todayilearned/comments/4k9f47/til_hocus_pocus_may_have_been_coined_by/')
+  //   .then(function(data) {
+  //     console.log(data);
+  //     console.log("----------------------------------------");
+  //     return embed.render(data);
+  //   })
+  //   .then(function(html) {
+  //     console.log(html);
+  //     assert.typeOf(html, 'string');
+  //   });
+  // });
 
   // it('Is able to fetch from pinterest', function() {
   //   return embed.fetch('https://www.pinterest.com/pin/417708934164289675/')

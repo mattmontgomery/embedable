@@ -16,21 +16,17 @@ module.exports = [
   }),
 
   Provider.extend({
-    name: 'reddit',
+    name: 'redditPost',
     type: 'rich',
-    uri: "reddit.com/r",
+    uri: /reddit.com\/r\/(.+?)\/comments\/(.+?)\/(.+?)\/$/i,
     script: '//embed.redditmedia.com/widgets/platform.js',
-    fetch: function(uri, parts) {
+    fetch: function(uri, values) {
       return this.fetchGraph(uri).then(function(data) {
-        var title = data.title || '';
-        var parts = title.match(/^(.*)? • (.*)$/);
-
-        if (parts) {
-          data.title = parts[1];
-          data.sub_path = parts[2];
-          data.sub_title = parts[2].replace(/^\/r\//, '');
-        }
-        data.card_time = Math.floor(new Date() / 1000);
+        data.post_sub = values[1];
+        data.post_hash = values[2];
+        data.post_slug = values[3];
+        data.post_time = Math.floor(new Date() / 1000);
+        data.title = data.title.replace(/\s*•.*/, '');
 
         return data;
       });
@@ -38,10 +34,46 @@ module.exports = [
     asEmbed: function(entry) {
       var data = entry.data;
 
-      return '<blockquote class="reddit-card" data-card-created="' + data.card_time + '">'
+      return '<blockquote class="reddit-card" data-card-created="' + data.post_time + '">'
         + '<a href="' + entry.uri + '?ref=share&ref_source=embed">' + data.title  + '</a>'
-        + ' from <a href="http://www.reddit.com' + data.sub_path + '">' 
-        + data.sub_title + '</a></blockquote>'
+        + ' from <a href="https://www.reddit.com/r/' + data.post_sub + '">' 
+        + data.post_sub + '</a></blockquote>'
+        + this.asScript();
+    }
+  }),
+
+  Provider.extend({
+    name: 'redditComment',
+    type: 'rich',
+    uri: /reddit.com\/r\/(.+?)\/comments\/(.+?)\/(.+?)\/(.+?)$/i,
+    script: '//www.redditstatic.com/comment-embed.js',
+    fetch: function(uri, values) {
+      return this.fetchGraph(uri).then(function(data) {
+        data.post_sub = values[1];
+        data.post_hash = values[2];
+        data.post_slug = values[3];
+        data.comment_hash = values[4];
+        data.post_time = Math.floor(new Date() / 1000);
+        data.title = data.title.replace(/\s*•.*/, '');
+
+        return data;
+      });
+    },
+    asEmbed: function(entry) {
+      var data = entry.data;
+      var time = new Date(data.post_time * 1000);
+
+      return '<div class="reddit-embed" '
+        + 'data-embed-media="www.redditmedia.com" '
+        + 'data-embed-parent="false" data-embed-live="false" '
+        + 'data-embed-created="' + time.toISOString() + '">'
+        + '<a href="' + entry.uri + '">Comment</a> '
+        + 'from discussion '
+        + '<a href="https://www.reddit.com/r/' 
+        + data.post_sub + '/comments/' 
+        + data.post_hash + '/' 
+        + data.post_slug + '/">'
+        + data.title + '</a>.</div>'
         + this.asScript();
     }
   }),

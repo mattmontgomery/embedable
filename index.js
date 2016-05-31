@@ -93,8 +93,11 @@ _.extend(Embed.prototype, {
       provider.uri = [provider.uri];
     }
     _.each(provider.uri, function(uri) {
+      if (!_.isRegExp(uri)) {
+        uri = new RegExp(uri, "i");
+      }
       self.patterns.push({
-        regex: new RegExp(uri, "i"),
+        regex: uri,
         provider: provider
       });
     });
@@ -187,7 +190,9 @@ _.extend(Embed.prototype, {
     }
     // make sure provider is valid
     if (!(provider = this.providers[entry.provider])) {
-      throw new Error('Invalid render data.provider: ' + entry.provider);
+      return this.fetch(entry).then(function(data) {
+        return self.render(data, opts);
+      });
     }
     // render via the provider
     return provider.render(entry, opts);

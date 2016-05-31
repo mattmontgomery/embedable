@@ -15,13 +15,23 @@ module.exports = [
     }
   }),
 
+  // NOTE: We have to include the script tag once for every embed. 
+  //       If we don't do this, then only the first embed renders.
   Provider.extend({
     name: 'imgur',
     type: 'rich',
     uri: "//imgur\\.com/gallery/(.+)$",
     script: '//s.imgur.com/min/embed.js',
     fetch: function(uri, parts) {
-      return this.fetchGraph(uri).then(function(data) {
+      return when.all([
+        this.fetchEmbed(uri, {
+          api: 'http://api.imgur.com/oembed.json'
+        }),
+        this.fetchGraph(uri)
+      ])
+      .then(function(data) {
+        data = _.extend({}, data[1], data[0]);
+
         if (data && data.photo_url) {
           data.photo_url = data.photo_url.replace(/\?fb$/, '');
         }
@@ -30,12 +40,6 @@ module.exports = [
         }
         return data;
       });
-    },
-    asEmbed: function(entry) {
-      return '<blockquote class="imgur-embed-pub" lang="en" data-id="' + entry.data.id + '">'
-        + '<a href="//imgur.com/' + entry.data.id + '">View post on imgur.com</a>'
-        + '</blockquote>'
-        + this.asScript();
     }
   }),
 
