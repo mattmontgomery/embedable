@@ -67,7 +67,7 @@ describe('Fetch Method', function() {
   // });
 
   it('Is able to fetch from reddit comment', function() {
-    return embed.fetch('https://www.reddit.com/r/todayilearned/comments/4lbdfl/til_louis_armstrong_asked_richard_nixon_to_carry/')
+    return embed.fetch('https://www.surveymonkey.com/r/WXBZ7N6')
     .then(function(data) {
       console.log(data);
       console.log("----------------------------------------");
@@ -79,18 +79,31 @@ describe('Fetch Method', function() {
     });
   });
 
-  it('Is able to fetch from reddit comment', function() {
-    return embed.fetch('https://www.reddit.com/r/todayilearned/comments/4lbdfl/til_louis_armstrong_asked_richard_nixon_to_carry/d3m86v8')
-    .then(function(data) {
-      console.log(data);
-      console.log("----------------------------------------");
-      return embed.render(data);
-    })
-    .then(function(html) {
-      console.log(html);
-      assert.typeOf(html, 'string');
-    });
-  });
+  // it('Is able to fetch from reddit comment', function() {
+  //   return embed.fetch('https://www.reddit.com/r/todayilearned/comments/4lbdfl/til_louis_armstrong_asked_richard_nixon_to_carry/')
+  //   .then(function(data) {
+  //     console.log(data);
+  //     console.log("----------------------------------------");
+  //     return embed.render(data);
+  //   })
+  //   .then(function(html) {
+  //     console.log(html);
+  //     assert.typeOf(html, 'string');
+  //   });
+  // });
+
+  // it('Is able to fetch from reddit comment', function() {
+  //   return embed.fetch('https://www.reddit.com/r/todayilearned/comments/4lbdfl/til_louis_armstrong_asked_richard_nixon_to_carry/d3m86v8')
+  //   .then(function(data) {
+  //     console.log(data);
+  //     console.log("----------------------------------------");
+  //     return embed.render(data);
+  //   })
+  //   .then(function(html) {
+  //     console.log(html);
+  //     assert.typeOf(html, 'string');
+  //   });
+  // });
 
   // it('Is able to fetch from youtube', function() {
   //   return embed.fetch('https://www.reddit.com/r/todayilearned/comments/4k9f47/til_hocus_pocus_may_have_been_coined_by/')

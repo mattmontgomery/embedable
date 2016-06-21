@@ -132,6 +132,20 @@ module.exports = [
   }),
 
   Provider.extend({
+    name: 'surveymonkey',
+    type: "rich",
+    uri: '//www.surveymonkey.com/r/(.+?)$',
+    fetch: function(uri, params) {
+      return {
+        id: params[1]
+      };
+    },
+    asEmbed: function(entry) {
+      return '<iframe src="' + entry.uri + '" width="100%" height="500" style="border: 1px solid #ddd;"></iframe>';
+    }
+  }),
+
+  Provider.extend({
     name: 'ted',
     type: 'video',
     uri: [
