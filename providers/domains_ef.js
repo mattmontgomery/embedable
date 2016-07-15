@@ -16,13 +16,33 @@ module.exports = [
   }),
 
   Provider.extend({
+    name: 'facebook-video',
+    type: 'rich',
+    uri: 'facebook\\.com/(.+?)/videos/([0-9]+)$',
+    weight: 79, // parse before facebook provider
+    fetch: function(uri) {
+      return this.fetchGraph(uri);
+    },
+    script: '//connect.facebook.net/en_US/sdk.js#xfbml=1&version=v2.7',
+    asEmbed: function(entry) {
+      return '<div class="fb-video" data-href="'
+        + entry.uri + '" data-width="auto" data-show-text="false">'
+        + '<div class="fb-xfbml-parse-ignore">'
+        + '<blockquote cite="' + entry.uri + '">'
+        + '<a href="' + entry.uri + '">View video on Facebook</a>'
+        + '</blockquote></div></div>'
+        + this.asScript();
+    }
+  }),
+
+  Provider.extend({
     name: 'facebook',
     type: 'rich',
     uri: 'facebook\\.com',
     fetch: function(uri) {
       return this.fetchGraph(uri);
     },
-    script: '//connect.facebook.net/en_US/sdk.js#xfbml=1&version=v2.2',
+    script: '//connect.facebook.net/en_US/sdk.js#xfbml=1&version=v2.7',
     asEmbed: function(entry) {
       return '<div class="embed-wrap">'
         + '<div class="fb-post" data-href="'

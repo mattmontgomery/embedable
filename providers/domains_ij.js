@@ -20,7 +20,10 @@ module.exports = [
   Provider.extend({
     name: 'imgur',
     type: 'rich',
-    uri: "//imgur\\.com/gallery/(.+)$",
+    uri: [
+      "//imgur\\.com/gallery/(.+)$",
+      "//imgur\\.com/([a-zA-Z0-9]+)$"
+    ],
     script: '//s.imgur.com/min/embed.js',
     fetch: function(uri, parts) {
       return when.all([
