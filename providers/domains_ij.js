@@ -48,8 +48,8 @@ module.exports = [
 
   Provider.extend({
     name: 'instagram',
-    type: 'photo',
-    uri: "//(instagram\\.com|instagr\\.am)/p/.+$",
+    type: 'rich',
+    uri: "(instagram\\.com|instagr\\.am)/p/.+$",
     parse: 'instgrm.Embeds.process',
     fetch: function(uri) {
       return this.fetchEmbed(uri, {
