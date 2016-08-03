@@ -11,6 +11,7 @@ module.exports = [
       "//mlg\\.tv/.+$",
       "//tv\\.majorleaguegaming\\.com/.+$"
     ],
+    version: 0,
     fetch: function(uri) {
       return this.fetchEmbed(uri, {
         api: 'http://tv.majorleaguegaming.com/oembed'
@@ -22,6 +23,7 @@ module.exports = [
     name: "meetup",
     type: "rich",
     uri: "meetup\\.(com|ps)/.+",
+    version: 0,
     fetch: function(uri) {
       return this.fetchEmbed(uri, {
         api: "http://api.meetup.com/oembed"
@@ -37,6 +39,7 @@ module.exports = [
       "//dashboard.minoto-video.com/main/video/details/.+",
       "//embed.minoto-video.com/.+"
     ],
+    version: 0,
     fetch: function(uri) {
       return this.fetchEmbed(uri, {
         api: "http://api.minoto-video.com/services/oembed.json"
@@ -48,6 +51,7 @@ module.exports = [
     name: 'mixcloud',
     type: "audio",
     uri: "//www\\.mixcloud\\.com/oembed/[^#?/]+/.+$",
+    version: 0,
     fetch: function(uri) {
       return this.fetchEmbed(uri, {
         api: 'http://www.mixcloud.com/oembed/'
@@ -59,6 +63,7 @@ module.exports = [
     name: 'mobypicture',
     type: "photo",
     uri: "(moby.to|mobypicture.com/user/.+/view/).+",
+    version: 0,
     fetch: function(uri) {
       return this.fetchEmbed(uri, {
         api: "http://api.mobypicture.com/oEmbed"
@@ -70,6 +75,7 @@ module.exports = [
     name: 'my-opera',
     type: 'rich',
     uri: "//my\\.opera\\.com/.+$",
+    version: 0,
     fetch: function(uri) {
       return this.fetchEmbed(uri, {
         api: 'http://my.opera.com/service/oembed'
@@ -81,6 +87,7 @@ module.exports = [
     name: 'nfb-ca',
     type: "video",
     uri: "//(?:[-\\w]+\\.)?nfb\\.ca/film/.+$",
+    version: 0,
     fetch: function(uri) {
       return this.fetchEmbed(uri, {
         api: 'http://www.nfb.ca/remote/services/oembed/'

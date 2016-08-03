@@ -8,6 +8,7 @@ module.exports = [
     name: 'qik',
     type: "video",
     uri: "//qik\\.(com|ly)/.+$",
+    version: 0,
     fetch: function(uri) {
       return this.fetchEmbed(uri, {
         api: 'http://qik.com/api/oembed.json'
@@ -20,6 +21,7 @@ module.exports = [
     type: 'rich',
     uri: /reddit.com\/r\/(.+?)\/comments\/(.+?)\/(.+?)\/$/i,
     script: '//embed.redditmedia.com/widgets/platform.js',
+    version: 1,
     fetch: function(uri, values) {
       return this.fetchGraph(uri).then(function(data) {
         data.post_sub = values[1];
@@ -47,6 +49,7 @@ module.exports = [
     type: 'rich',
     uri: /reddit.com\/r\/(.+?)\/comments\/(.+?)\/(.+?)\/(.+?)$/i,
     script: '//www.redditstatic.com/comment-embed.js',
+    version: 1,
     fetch: function(uri, values) {
       return this.fetchGraph(uri).then(function(data) {
         data.post_sub = values[1];
@@ -82,6 +85,7 @@ module.exports = [
     name: 'rdio.com',
     type: "rich",
     uri: "rdio\\.com/(people|artist)/[^#?/]+/(playlists|album)/.+$",
+    version: 0,
     fetch: function(uri) {
       return this.fetchEmbed(uri, {
         api: "http://www.rdio.com/api/oembed/"
@@ -93,6 +97,7 @@ module.exports = [
     name: 'revision3',
     type: "video",
     uri: "//[-\\w]+\\.revision3\\.com/.+$",
+    version: 0,
     fetch: function(uri) {
       return this.fetchEmbed(uri, {
         api: "http://revision3.com/api/oembed/"
@@ -104,6 +109,7 @@ module.exports = [
     name: "roomsharejp",
     type: "rich",
     uri: "roomshare\\.jp/(en/)?post/.*",
+    version: 0,
     fetch: function(uri) {
       return this.fetchEmbed(uri, {
         api: "http://roomshare.jp/oembed.json"

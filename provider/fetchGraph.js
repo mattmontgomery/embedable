@@ -1,5 +1,6 @@
 var _ = require('lodash')
-  , fetchMeta = require('./fetchMeta');
+  , fetchMeta = require('./fetchMeta')
+  , url = require('url');
 
 // -------------------------------------------------------------------
 //        MAIN EXPORT
@@ -7,85 +8,81 @@ var _ = require('lodash')
 
 module.exports = function(uri, opts) {
   return fetchMeta(uri).then(function(data) {
-    switch (data.type) {
+    var out = data;
 
-      // handle binary file types
-      case 'other':
-        return {
-          type: 'other',
-          mime: data.mime,
-          size: data.size
-        };
-
-      // handle image file types
-      case 'photo':
-        return {
-          type: 'photo',
-          photo_url: uri
-        };
-
-      // handle text/html file types
-      default:
-        return extract(data, _.extend({
-          type: 'meta/og/type',
-          title: [
-            'meta/title',
-            'meta/og/title',
-            'meta/twitter/title',
-            'meta/sailthru/title',
-            'title'
-          ],
-          description: [
-            'meta/og/description',
-            'meta/twitter/description',
-            'meta/sailthru/description'
-          ],
-          author_url: null,
-          author: [
-            'meta/profile/first_name',
-            'meta/article/author',
-            'meta/sailthru/author'
-          ],
-          site_url: [
-            'meta/og/website',
-            'article/publisher'
-          ],
-          site: [
-            'meta/og/site_name',
-            'meta/twitter/site'
-          ],
-          photo_url: [
-            'meta/og/image',
-            'meta/og/image/url',
-            'meta/og/image/secure_url',
-            'meta/tbi-image',
-            'meta/sailthru/image/full',
-            'meta/sailthru/image/thumb',
-            'meta/twitter/image',
-            'icons/apple-touch-icon',
-            'icons/icon',
-            'icons/shortcut-icon'
-          ],
-          photo_type: 'meta/og/image/type',
-          photo_width: 'meta/og/image/width',
-          photo_height: 'meta/og/image/height',
-          embed_src: [
-            'meta/og/video',
-            'meta/og/video/url',
-            'meta/og/video/secure_url'
-          ],
-          embed_mime: 'meta/og/video/type',
-          embed_html: null,
-          embed_width: 'meta/og/video/width',
-          embed_height: 'meta/og/video/height'
-        }, opts));
+    if (data.type === 'text') {
+      out = extract(out, _.extend({
+        type: 'meta/og/type',
+        title: [
+          'meta/title',
+          'meta/og/title',
+          'meta/twitter/title',
+          'meta/sailthru/title',
+          'title'
+        ],
+        description: [
+          'meta/og/description',
+          'meta/twitter/description',
+          'meta/sailthru/description'
+        ],
+        author_url: null,
+        author: [
+          'meta/profile/first_name',
+          'meta/article/author',
+          'meta/sailthru/author'
+        ],
+        site_url: [
+          'meta/og/website',
+          'article/publisher'
+        ],
+        site: [
+          'meta/og/site_name',
+          'meta/twitter/site'
+        ],
+        photo_url: [
+          'meta/og/image',
+          'meta/og/image/url',
+          'meta/og/image/secure_url',
+          'meta/tbi-image',
+          'meta/sailthru/image/full',
+          'meta/sailthru/image/thumb',
+          'meta/twitter/image',
+          'icons/apple-touch-icon',
+          'icons/icon',
+          'icons/shortcut-icon'
+        ],
+        photo_type: 'meta/og/image/type',
+        photo_width: 'meta/og/image/width',
+        photo_height: 'meta/og/image/height',
+        embed_src: [
+          'meta/og/video',
+          'meta/og/video/url',
+          'meta/og/video/secure_url'
+        ],
+        embed_mime: 'meta/og/video/type',
+        embed_html: null,
+        embed_width: 'meta/og/video/width',
+        embed_height: 'meta/og/video/height'
+      }, opts));
     }
+    out.request = data.request; 
+    normalizeURL(out, 'photo_url');
+
+    return out;
   });
 };
 
 // -------------------------------------------------------------------
 //        PRIVATE METHODS
 // -------------------------------------------------------------------
+
+function normalizeURL(out, name) {
+  var path = out[name];
+
+  if (path) {
+    out[name] = url.resolve(out.request, path);
+  }
+}
 
 function extract(data, opts) {
   return _.mapValues(opts, function(path) {

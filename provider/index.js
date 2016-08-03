@@ -73,6 +73,7 @@ _.extend(Provider.prototype, {
   name: null,           // {String} Provider name
   uri: null,            // {Array}  URL patterns
   weight: 80,           // {Number} URI weight (lower is first)
+  version: 0,           // {Number} Version of code
 
   type: 'rich',         // {String} Default data type
 

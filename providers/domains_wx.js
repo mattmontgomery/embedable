@@ -8,6 +8,7 @@ module.exports = [
     name: 'wistia',
     type: "video",
     uri: "(wistia.com|wi.st)/(m|embed)/.+",
+    version: 0,
     fetch: function(uri) {
       return this.fetchEmbed(uri, {
         api: 'http://fast.wistia.com/oembed.json'
@@ -24,9 +25,10 @@ module.exports = [
       "techcrunch\\.com/.+",
       "wp\\.me/.+"
     ],
+    version: 0,
     fetch: function(uri) {
       return this.fetchEmbed(uri, {
-        api: "http://wordpress.tv/oembed/"
+        api: "public-api.wordpress.com/oembed/1.0/"
       });
     }
   })

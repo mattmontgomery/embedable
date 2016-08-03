@@ -42,14 +42,14 @@ var MOVE_PARAMS = {
 
 module.exports = function(uri, opts) {
   return fetchUri(toAPI(uri, opts)).then(function(data) {
-    if (!data || !data.body) {
-      throw new Error('Invalid Oembed API response: ' + uri);
-    }
     try {
       data = JSON.parse(unescape(data.body));
     }
     catch (err) {
-      throw new Error('Error parsing Oembed response: ' + uri);
+      throw {
+        type: 'oembed_error',
+        request: data.request
+      };
     }
     // console.log('GRAPH', JSON.stringify(data, null, ' '));
 
@@ -120,7 +120,8 @@ function toAPI(uri, opts) {
 
   api += (api.indexOf('?') <= 0) ? "?" : "&";
   api += 'format=json';
-  api += "&url=" + escape(uri);
+  api += "&url=" + encodeURIComponent(uri);
+  api += "&for=" + 'embedable';
 
   return api;
 }

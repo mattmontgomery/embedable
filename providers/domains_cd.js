@@ -8,6 +8,7 @@ module.exports = [
     name: "cacoo",
     type: "rich",
     uri: "cacoo.com/.+",
+    version: 0,    
     fetch: function(uri) {
       return this.fetchEmbed(uri, {
         api: "http://cacoo.com/oembed.json"
@@ -19,6 +20,7 @@ module.exports = [
     name: 'chirbit',
     type: "rich",
     uri: "chirb.it/.+",
+    version: 0,    
     fetch: function(uri) {
       return this.fetchEmbed(uri, {
         api: 'http://chirb.it/oembed.json'
@@ -30,6 +32,7 @@ module.exports = [
     name: 'circuitlab',
     type: "photo",
     uri: "//(?:www\\.)?circuitlab\\.com/circuit/.+$",
+    version: 0,    
     fetch: function(uri) {
       return this.fetchEmbed(uri, {
         api: "https://www.circuitlab.com/circuit/oembed/"
@@ -41,6 +44,7 @@ module.exports = [
     name: 'clikthrough',
     type: "video",
     uri: "//(?:[-\\w]+\\.)?clikthrough\\.com/.+$",
+    version: 0,    
     fetch: function(uri) {
       return this.fetchEmbed(uri, {
         api: "http://clikthrough.com/services/oembed"
@@ -52,6 +56,7 @@ module.exports = [
     name: 'collegehumor',
     type: "video",
     uri: "collegehumor\\.com/video/.+",
+    version: 0,    
     fetch: function(uri) {
       return this.fetchEmbed(uri, {
         api: "http://www.collegehumor.com/oembed.json"
@@ -63,6 +68,7 @@ module.exports = [
     name: 'coub',
     type: "video",
     uri: "//coub\\.com/(view|embed)/.+$",
+    version: 0,    
     fetch: function(uri) {
       return this.fetchEmbed(uri, {
         api: 'http://coub.com/api/oembed.json'
@@ -74,6 +80,7 @@ module.exports = [
     name: 'crowdranking',
     type: 'rich',
     uri: "//crowdranking\\.com/(crowdrankings|rankings|topics|widgets|r)/.+$",
+    version: 0,    
     fetch: function(uri) {
       return this.fetchEmbed(uri, {
         api: 'http://crowdranking.com/api/oembed.json'
@@ -85,6 +92,7 @@ module.exports = [
     name: "dailymile",
     type: "rich",
     uri: "//(?:www\\.)?dailymile\\.com/people/[^#?/]+/entries/.+$",
+    version: 0,    
     fetch: function(uri) {
       return this.fetchEmbed(uri, {
         api: "http://api.dailymile.com/oembed"
@@ -96,6 +104,7 @@ module.exports = [
     name: 'dailymotion',
     type: "video",
     uri: "//[-\\w]+\\.dailymotion\\.com/.+$",
+    version: 0,    
     fetch: function(uri) {
       return this.fetchEmbed(uri, {
         api: 'http://www.dailymotion.com/api/oembed/'
@@ -111,6 +120,7 @@ module.exports = [
       "//(fav\\.me|sta\\.sh)fav\\.me/.+$",
       "//(?:[-\\w]+\\.)?deviantart\\.com/[^#?/]+#/d.+$"
     ],
+    version: 0,    
     fetch: function(uri) {
       return this.fetchEmbed(uri, {
         api: "http://backend.deviantart.com/oembed",
@@ -122,6 +132,7 @@ module.exports = [
     name: 'dipdive',
     type: 'rich',
     uri: "//[-\\w]+\\.dipdive\\.com/media/.+$",
+    version: 0,    
     fetch: function(uri) {
       return this.fetchEmbed(uri, {
         api: 'http://api.dipdive.com/oembed.json'
@@ -133,6 +144,7 @@ module.exports = [
     name: "dipity",
     type: "rich",
     uri: "dipity.com/(timeline|voaweb)/.+",
+    version: 0,    
     fetch: function(uri) {
       return this.fetchEmbed(uri, {
         api: 'http://www.dipity.com/oembed/timeline/'
@@ -144,6 +156,7 @@ module.exports = [
     name: 'dotsub',
     type: "video",
     uri: "//dotsub\\.com/view/.+$",
+    version: 0,    
     fetch: function(uri) {
       return this.fetchEmbed(uri, {
         api: "http://dotsub.com/services/oembed"

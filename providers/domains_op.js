@@ -8,6 +8,7 @@ module.exports = [
     name: 'official.fm',
     type: "rich",
     uri: "official.fm/.+",
+    version: 0,
     fetch: function(uri) {
       return this.fetchEmbed(uri, {
         api: 'http://official.fm/services/oembed.json'
@@ -19,6 +20,7 @@ module.exports = [
     name: 'photobucket',
     type: "photo",
     uri: "photobucket\\.com/(albums|groups)/.+$",
+    version: 0,
     fetch: function(uri) {
       return this.fetchEmbed(uri, {
         api: "https://photobucket.com/oembed"
@@ -44,6 +46,7 @@ module.exports = [
     name: "polldaddy",
     type: "rich",
     uri: "polldaddy.com/",
+    version: 0,
     fetch: function(uri) {
       return this.fetchEmbed(uri, {
         api: 'http://polldaddy.com/oembed/'
@@ -55,6 +58,7 @@ module.exports = [
     name: 'polleverywhere',
     type: 'rich',
     uri: "//www\\.polleverywhere\\.com/(polls|multiple_choice_polls|free_text_polls)/.+$",
+    version: 0,
     fetch: function(uri) {
       return this.fetchEmbed(uri, {
         api: 'http://www.polleverywhere.com/services/oembed/'

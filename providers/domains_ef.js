@@ -8,6 +8,7 @@ module.exports = [
     name: 'etsy',
     type: 'rich',
     uri: "//(?:www\\.)?etsy\\.com/listing/.+$",
+    version: 0,
     fetch: function(uri) {
       return this.fetchEmbed(uri, {
         api: 'http://openapi.etsy.com/svc/oembed/'
@@ -20,6 +21,7 @@ module.exports = [
     type: 'rich',
     uri: 'facebook\\.com/(.+?)/videos/([0-9]+)$',
     weight: 79, // parse before facebook provider
+    version: 1,
     fetch: function(uri) {
       return this.fetchGraph(uri);
     },
@@ -39,6 +41,7 @@ module.exports = [
     name: 'facebook',
     type: 'rich',
     uri: 'facebook\\.com',
+    version: 1,
     fetch: function(uri) {
       return this.fetchGraph(uri);
     },
@@ -58,6 +61,7 @@ module.exports = [
       "//[-\\w]+\\.flickr\\.com/photos/.+$",
       "//flic\\.kr\\.com/.+$"
     ],
+    version: 0,
     fetch: function(uri) {
       return this.fetchEmbed(uri, {
         api: "http://www.flickr.com/services/oembed/"
@@ -69,6 +73,7 @@ module.exports = [
     name: 'funnyordie',
     type: "video",
     uri: "//www\\.funnyordie\\.com/videos/.+$",
+    version: 0,
     fetch: function(uri) {
       return this.fetchEmbed(uri, {
         api: 'http://www.funnyordie.com/oembed.json'

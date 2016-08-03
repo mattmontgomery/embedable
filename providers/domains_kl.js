@@ -8,6 +8,7 @@ module.exports = [
     name: "kickstarter",
     type: "rich",
     uri: "//[-\\w]+\\.kickstarter\\.com/projects/.+$",
+    version: 0,
     fetch: function(uri) {
       return this.fetchEmbed(uri, {
         api: "http://www.kickstarter.com/services/oembed"
@@ -19,6 +20,7 @@ module.exports = [
     name: 'Kinomap',
     type: "video",
     uri: "kinomap\\.com/.+$",
+    version: 0,
     fetch: function(uri) {
       return this.fetchEmbed(uri, {
         api: "http://www.kinomap.com/oembed"

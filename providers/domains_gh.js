@@ -8,6 +8,7 @@ module.exports = [
     name: 'geograph',
     type: 'rich',
     uri: "//(?:[-\\w]+\\.)?geograph\\.(org|co|ie)(\\.uk)?/.+$",
+    version: 0,
     fetch: function(uri) {
       return this.fetchEmbed(uri, {
         api: 'http://api.geograph.org.uk/api/oembed'
@@ -19,6 +20,7 @@ module.exports = [
     name: "giphy",
     type: "video",
     uri: "(giphy\.com|gph\.is)/.+",
+    version: 1,
     fetch: function(uri) {
       return this.fetchGraph(uri).then(function(data) {
         var photo = data.photo_url
@@ -38,6 +40,7 @@ module.exports = [
     name: "github",
     type: "rich",
     uri: "gist.github.com/.+",
+    version: 0,
     fetch: function(uri) {
       return this.fetchEmbed(uri, {
         api: "https://github.com/api/oembed"
@@ -49,6 +52,7 @@ module.exports = [
     name: "gmep",
     type: "rich",
     uri: "gmep.(imeducate\\.com|org)/.*",
+    version: 0,
     fetch: function(uri) {
       return this.fetchEmbed(uri, {
         api: "http://gmep.org/oembed.json"
@@ -64,6 +68,7 @@ module.exports = [
       "//geo\\.hlipp\\.de/.+$",
       "//germany\\.geograph\\.org/.+$"
     ],
+    version: 0,
     fetch: function(uri) {
       return this.fetchEmbed(uri, {
         api: 'http://geo.hlipp.de/restapi.php/api/oembed'
@@ -75,6 +80,7 @@ module.exports = [
     name: 'huffduffer',
     type: "rich",
     uri: "huffduffer.com/[-.\\w@]+/\\d+",
+    version: 0,
     fetch: function(uri) {
       return this.fetchEmbed(uri, {
         api: "http://huffduffer.com/oembed"
@@ -86,6 +92,7 @@ module.exports = [
     name: 'hulu',
     type: "video",
     uri: "//www\\.hulu\\.com/watch/.+$",
+    version: 0,
     fetch: function(uri) {
       return this.fetchEmbed(uri, {
         api: "http://www.hulu.com/api/oembed.json"

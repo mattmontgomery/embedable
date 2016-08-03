@@ -8,6 +8,7 @@ module.exports = [
     name: 'sapo',
     type: "video",
     uri: "videos\\.sapo\\.pt/.*",
+    version: 0,
     fetch: function(uri) {
       return this.fetchEmbed(uri, {
         api: "http://videos.sapo.pt/oembed"
@@ -19,6 +20,7 @@ module.exports = [
     name: "screenr",
     type: "rich",
     uri: "//www\\.screenr\\.com/.+$",
+    version: 0,
     fetch: function(uri) {
       return this.fetchEmbed(uri, {
         api: "http://www.screenr.com/api/oembed.json"
@@ -30,6 +32,7 @@ module.exports = [
     name: "scribd",
     type: "rich",
     uri: "//[-\\w]+\\.scribd\\.com/.+$",
+    version: 0,
     fetch: function(uri) {
       return this.fetchEmbed(uri, {
         api: 'http://www.scribd.com/services/oembed'
@@ -41,6 +44,7 @@ module.exports = [
     name: 'shoudio',
     type: "rich",
     uri: "(shoudio\\.com|shoul\\.io)/.+",
+    version: 0,
     fetch: function(uri) {
       return this.fetchEmbed(uri, {
         api: "http://shoudio.com/api/oembed"
@@ -52,6 +56,7 @@ module.exports = [
     name: "sketchfab",
     type: "rich",
     uri: "sketchfab.com/show/.+",
+    version: 0,
     fetch: function(uri) {
       return this.fetchEmbed(uri, {
         api: 'http://sketchfab.com/oembed'
@@ -63,6 +68,7 @@ module.exports = [
     name: 'skitch',
     type: "photo",
     uri: "//(?:www\\.)?skitch\\.(com|ch)/.+$",
+    version: 0,
     fetch: function(uri) {
       return this.fetchEmbed(uri, {
         api: 'http://skitch.com/oembed'
@@ -74,6 +80,7 @@ module.exports = [
     name: "slideshare",
     type: "rich",
     uri: "//www\\.slideshare\\.net/.+$",
+    version: 0,
     fetch: function(uri) {
       return this.fetchEmbed(uri, {
         api: "http://www.slideshare.net/api/oembed/2"
@@ -85,6 +92,7 @@ module.exports = [
     name: 'smugmug',
     type: "photo",
     uri: "smugmug.com/[-.\\w@]+/.+",
+    version: 0,
     fetch: function(uri) {
       return this.fetchEmbed(uri, {
         api: "http://api.smugmug.com/services/oembed/"
@@ -96,6 +104,7 @@ module.exports = [
     name: 'speakerdeck',
     type: 'rich',
     uri: "//speakerdeck\\.com/.+$",
+    version: 0,
     fetch: function(uri) {
       return this.fetchEmbed(uri, {
         api: 'https://speakerdeck.com/oembed.json'
@@ -110,6 +119,7 @@ module.exports = [
       "//soundcloud\\.com/[^#?/]+/.+$",
       "//snd.sc/.+"
     ],
+    version: 0,
     fetch: function(uri) {
       return this.fetchEmbed(uri, {
         api: "http://soundcloud.com/oembed"
@@ -124,6 +134,7 @@ module.exports = [
       "//open\\.spotify\\.com/(track|album|user).+$",
       "//spoti\\.fi/.+$"
     ],
+    version: 0,
     fetch: function(uri) {
       return this.fetchEmbed(uri, {
         api: "https://embed.spotify.com/oembed/"
@@ -135,6 +146,7 @@ module.exports = [
     name: 'surveymonkey',
     type: "rich",
     uri: '//www.surveymonkey.com/r/(.+?)$',
+    version: 0,
     fetch: function(uri, params) {
       return {
         id: params[1]
@@ -154,6 +166,7 @@ module.exports = [
       "//(?:www\\.)?ted\\.com/index\\.php/talks/.+$",
       "//(?:www\\.)?ted\\.com/index\\.php/talks/lang/[^#?/]+/.+$"
     ],
+    version: 0,
     fetch: function(uri) {
       return this.fetchEmbed(uri, {
         api: 'http://www.ted.com/talks/oembed.json'
@@ -165,6 +178,7 @@ module.exports = [
     name: 'tout',
     type: 'video',
     uri: "//player\\.tout\\.com/embeds/([^.]+)\\.js\\?(.+)$",
+    version: 0,
     fetch: function(uri, params) {
       return _.reduce(params[2].split('&'), function(out, part) {
         var vals = part.split('=');
@@ -183,6 +197,7 @@ module.exports = [
     type: 'rich',
     uri: "tumblr.com/post/(.+)$",
     script: '//secure.assets.tumblr.com/post.js',
+    version: 0,
     fetch: function(uri, parts) {
       return when.all([
         this.fetchGraph(uri),
@@ -209,7 +224,7 @@ module.exports = [
     uri: "//twitter\\.com/(?:#!)?[^#?/]+/status/.+$",
     script: '//platform.twitter.com/widgets.js',
     parse: 'twttr.widgets.load',
-
+    version: 0,
     fetch: function(uri) {
       return when.all([
         this.fetchGraph(uri),

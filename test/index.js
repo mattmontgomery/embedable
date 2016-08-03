@@ -66,8 +66,8 @@ describe('Fetch Method', function() {
   //   });
   // });
 
-  it('Is able to fetch from reddit comment', function() {
-    return embed.fetch('https://www.surveymonkey.com/r/WXBZ7N6')
+  it('Is able to fetch from vimeo', function() {
+    return embed.fetch('https://vine.co/v/5AvZeItT92Z')
     .then(function(data) {
       console.log(data);
       console.log("----------------------------------------");

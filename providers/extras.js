@@ -10,6 +10,7 @@ module.exports = [
     type: 'other',
     weight: 20,
     uri: '^tel:(.*)$',
+    version: 0,
     fetch: function(uri, parts) {
       return {
         title: parts[1]
@@ -23,6 +24,7 @@ module.exports = [
     type: 'other',
     weight: 20,
     uri: '^mailto:(.*)$',
+    version: 0,
     fetch: function(uri, parts) {
       return {
         title: parts[1]
@@ -36,6 +38,7 @@ module.exports = [
     type: 'other',
     weight: 30,
     uri: '^(?!https*:|\\\/\\\/)',
+    version: 0,
     fetch: function(uri) {
       return {};
     }
@@ -47,6 +50,7 @@ module.exports = [
     type: 'photo',
     weight: 50,
     uri: '\\.(jpg|jpeg|gif|png)$',
+    version: 0,
     fetch: function(uri) {
       return {
         type: 'photo',

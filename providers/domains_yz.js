@@ -8,6 +8,7 @@ module.exports = [
     name: 'yandex',
     type: 'video',
     uri: "//video\\.yandex\\.ru/users/[^#?/]+/view/.+$",
+    version: 0,
     fetch: function(uri) {
       return this.fetchEmbed(uri, {
         api: 'http://video.yandex.ru/oembed.json'
@@ -19,6 +20,7 @@ module.exports = [
     name: 'yfrog',
     type: 'rich',
     uri: "//(?:www\\.)?yfrog\\.(us|com)/.+$",
+    version: 0,
     fetch: function(uri) {
       return this.fetchEmbed(uri, {
         api: 'http://www.yfrog.com/api/oembed'
@@ -30,11 +32,10 @@ module.exports = [
     name: 'youtube',
     type: 'video',
     uri: [
-      "//youtu\\.be/.+$",
-      "//(?:[-\\w]+\\.)?youtube\\.com/[^#?/]+#[^#?/]+/.+$",
-      "//m\\.youtube\\.com/index.+$",
-      "//(?:[-\\w]+\\.)?youtube\\.com/(profile|view_play_list|playlist|user|watch|v).+$",
+      "//youtube\\.com/[^#?/]+#[^#?/]+/.+$",
+      /(youtube\.com|youtu\.be)\/(embed|index|profile|view_play_list|playlist|user|watch|v)\//,
     ],
+    version: 0,
     fetch: function(uri) {
       return this.fetchGraph(uri, {
         paid: 'meta/paid',

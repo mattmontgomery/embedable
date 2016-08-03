@@ -8,6 +8,7 @@ module.exports = [
     name: 'ifixit',
     type: 'rich',
     uri: "//www\\.ifixit\\.com/[^#?/]+/[^#?/]+/.+$",
+    version: 0,
     fetch: function(uri) {
       return this.fetchEmbed(uri, {
         api: 'http://www.ifixit.com/Embed'
@@ -22,9 +23,11 @@ module.exports = [
     type: 'rich',
     uri: [
       "//imgur\\.com/gallery/(.+)$",
+      "//imgur\\.com/\\w/(.+)$",
       "//imgur\\.com/([a-zA-Z0-9]+)$"
     ],
     script: '//s.imgur.com/min/embed.js',
+    version: 1,
     fetch: function(uri, parts) {
       return when.all([
         this.fetchEmbed(uri, {
@@ -51,6 +54,7 @@ module.exports = [
     type: 'rich',
     uri: "(instagram\\.com|instagr\\.am)/p/.+$",
     parse: 'instgrm.Embeds.process',
+    version: 1,
     fetch: function(uri) {
       return this.fetchEmbed(uri, {
         api: 'http://api.instagram.com/oembed'
@@ -62,6 +66,7 @@ module.exports = [
     name: 'justin.tv',
     type: "video",
     uri: "justin.tv/.+",
+    version: 0,
     fetch: function(uri) {
       return this.fetchEmbed(uri, {
         api: 'http://api.justin.tv/api/embed/from_url.json'

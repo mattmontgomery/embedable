@@ -104,7 +104,8 @@ _.extend(Embed.prototype, {
   },
 
   fetch: function(opts) {
-    var pattern, data;
+    var self = this
+      , pattern;    
 
     // ensure opts is an object
     if (typeof opts === 'string') {
@@ -114,24 +115,51 @@ _.extend(Embed.prototype, {
     else if (typeof opts.uri !== 'string') {
       opts.uri = '' + opts.uri;
     }
-    // get the matching provider pattern
-    if ((pattern = this.findProvider(opts.uri))) {
-      opts.provider = pattern.provider.name;
+    // ensure error isn't already set
+    if (opts.error) {
+      delete opts.error;
     }
+    // ensure data isn't already set
+    if (opts.data) {
+      delete opts.data;
+    }
+    // get the matching provider pattern
+    if ((pattern = this.findProvider(opts.redirect || opts.uri))) {
+      opts.provider = pattern.provider.name;
+      opts.version = pattern.provider.version;
+      opts.updated = Date.now();
+    }
+    // if no provider was found, return error
     else {
-      throw new Error('Unable to find provider for ' + opts.uri);
+      return when.reject({
+        type: 'provider_mismatch',
+        err: 'unable to find provider'
+      });
     }
     // resolve the provider promise
-    return this.fetchProvider(opts, pattern).then(function(data) {
-      opts.data = _.pick(data, _.identity);
-      return opts;
-    })
-    // handle fetching errors
-    .catch(function(err) {
-      opts.error = '' + err;
-      opts.data = {};
-      return opts;
-    });
+    return this.fetchProvider(opts, pattern)
+      .then(function(data) {
+
+        // handle default provider redirects
+        if (opts.provider === 'default'
+            && data.request 
+            && opts.uri !== data.request
+            && !opts.redirect) {
+          opts.redirect = data.request;
+          return self.fetch(opts);
+        }
+        opts.data = _.pick(data, _.identity);
+        return opts;
+      })
+      // handle fetching errors
+      .catch(function(err) {
+        if (typeof err !== 'object') {
+          err = { type: 'embed_error' };
+        }
+        opts.error = err;
+        opts.data = {};
+        return opts;
+      });
   },
 
   findProvider: function(uri) {
@@ -143,13 +171,17 @@ _.extend(Embed.prototype, {
   },
 
   fetchProvider: function(opts, pattern) {
-    var parts = opts.uri.match(pattern.regex);
+    var uri = opts.redirect || opts.uri
+      parts = uri.match(pattern.regex);
 
     try {
-      data = pattern.provider.fetch(opts.uri, parts);
+      data = pattern.provider.fetch(uri, parts);
     }
     catch (err) {
-      return when.reject(err);
+      return when.reject({
+        type: 'provider_fetch',
+        err: err.toString()
+      });
     }
     if (!data) {
       return when.resolve({});
