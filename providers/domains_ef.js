@@ -19,7 +19,7 @@ module.exports = [
   Provider.extend({
     name: 'facebook-video',
     type: 'rich',
-    uri: 'facebook\\.com/(.+?)/videos/([0-9]+)$',
+    uri: 'facebook\\.com/(.+?)/videos/([0-9]+)/*$',
     weight: 79, // parse before facebook provider
     version: 1,
     fetch: function(uri) {

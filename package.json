@@ -1,6 +1,6 @@
 {
   "name": "embedable",
-  "version": "1.0.13",
+  "version": "1.0.14",
   "description": "Oembed and OpenGraph embeds for content",
   "main": "index.js",
   "scripts": {
