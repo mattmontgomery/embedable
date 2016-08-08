@@ -91,6 +91,18 @@ describe('Fetch Method', function() {
       assert.typeOf(html, 'string');
     });
   });
+  it('Is able to fetch from Graphiq', function() {
+    return embed.fetch('https://www.graphiq.com/w/eCrlBXn4c17')
+    .then(function(data) {
+      console.log(data);
+      console.log("----------------------------------------");
+      return embed.render(data);
+    })
+    .then(function(html) {
+      console.log(html);
+      assert.typeOf(html, 'string');
+    });
+  });
 
   // it('Is able to fetch from reddit comment', function() {
   //   return embed.fetch('https://www.reddit.com/r/todayilearned/comments/4lbdfl/til_louis_armstrong_asked_richard_nixon_to_carry/')

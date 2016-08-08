@@ -21,6 +21,7 @@ module.exports = [
      type: 'rich',
      uri: /qzzr.com\/c\/quiz\/(.+?)\/(.+)/,
      script: '//dcc4iyjchzom0.cloudfront.net/widget/loader.js',
+     version: 0,
      fetch: function(uri, values)  {
          return this.fetchGraph(uri).then(function(data) {
             return data;

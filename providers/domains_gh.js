@@ -61,6 +61,19 @@ module.exports = [
   }),
 
   Provider.extend({
+    name: "graphiq",
+    type: "rich",
+    uri: /\/\/.+?graphiq.com\/w\/(.+)/,
+    version: 0,
+    fetch: function(uri) {
+        console.log(uri);
+      return this.fetchEmbed(uri, {
+        api: "http://oembed.graphiq.com/services/oembed"
+      });
+    }
+  }),
+
+  Provider.extend({
     name: 'hlipp',
     type: 'rich',
     uri: [
