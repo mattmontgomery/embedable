@@ -91,8 +91,9 @@ describe('Fetch Method', function() {
       assert.typeOf(html, 'string');
     });
   });
-  it('Is able to fetch from Graphiq', function() {
-    return embed.fetch('https://www.graphiq.com/wlp/dkAYMGlYKlD')
+
+  it('Is able to fetch from pollcaster', function() {
+    return embed.fetch('https://www.pollcaster.com/c/poll/4xi4zsfv5gSXhnkaVoT9pfTOOgm')
     .then(function(data) {
       console.log(data);
       console.log("----------------------------------------");
@@ -103,6 +104,18 @@ describe('Fetch Method', function() {
       assert.typeOf(html, 'string');
     });
   });
+  /*it('Is able to fetch from Graphiq', function() {
+    return embed.fetch('https://www.graphiq.com/wlp/dkAYMGlYKlD')
+    .then(function(data) {
+      console.log(data);
+      console.log("----------------------------------------");
+      return embed.render(data);
+    })
+    .then(function(html) {
+      console.log(html);
+      assert.typeOf(html, 'string');
+    });
+  });*/
 
   // it('Is able to fetch from reddit comment', function() {
   //   return embed.fetch('https://www.reddit.com/r/todayilearned/comments/4lbdfl/til_louis_armstrong_asked_richard_nixon_to_carry/')
