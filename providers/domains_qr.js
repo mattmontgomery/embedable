@@ -17,6 +17,24 @@ module.exports = [
   }),
 
   Provider.extend({
+     name: 'qzzr',
+     type: 'rich',
+     uri: /qzzr.com\/c\/quiz\/(.+?)\/(.+)/,
+     script: '//dcc4iyjchzom0.cloudfront.net/widget/loader.js',
+     version: 0,
+     fetch: function(uri, values)  {
+         return this.fetchGraph(uri).then(function(data) {
+            return data;
+         });
+     },
+     asEmbed: function(entry) {
+         var data = entry.data;
+         return '<div class="quizz-container" data-width="100%"" data-height="auto" data-quiz="253072"></div>'
+           + this.asScript();
+     }
+  }),
+
+  Provider.extend({
     name: 'redditPost',
     type: 'rich',
     uri: /reddit.com\/r\/(.+?)\/comments\/(.+?)\/(.+?)\/$/i,
@@ -38,7 +56,7 @@ module.exports = [
 
       return '<blockquote class="reddit-card" data-card-created="' + data.post_time + '">'
         + '<a href="' + entry.uri + '?ref=share&ref_source=embed">' + data.title  + '</a>'
-        + ' from <a href="https://www.reddit.com/r/' + data.post_sub + '">' 
+        + ' from <a href="https://www.reddit.com/r/' + data.post_sub + '">'
         + data.post_sub + '</a></blockquote>'
         + this.asScript();
     }
@@ -72,9 +90,9 @@ module.exports = [
         + 'data-embed-created="' + time.toISOString() + '">'
         + '<a href="' + entry.uri + '">Comment</a> '
         + 'from discussion '
-        + '<a href="https://www.reddit.com/r/' 
-        + data.post_sub + '/comments/' 
-        + data.post_hash + '/' 
+        + '<a href="https://www.reddit.com/r/'
+        + data.post_sub + '/comments/'
+        + data.post_hash + '/'
         + data.post_slug + '/">'
         + data.title + '</a>.</div>'
         + this.asScript();

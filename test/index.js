@@ -79,6 +79,31 @@ describe('Fetch Method', function() {
     });
   });
 
+  it('Is able to fetch from qzzr', function() {
+    return embed.fetch('https://www.qzzr.com/c/quiz/253072/which-dog-are-you-45cc751a-48dc-46df-a327-6703b44a14a5')
+    .then(function(data) {
+      console.log(data);
+      console.log("----------------------------------------");
+      return embed.render(data);
+    })
+    .then(function(html) {
+      console.log(html);
+      assert.typeOf(html, 'string');
+    });
+  });
+  it('Is able to fetch from Graphiq', function() {
+    return embed.fetch('https://www.graphiq.com/wlp/dkAYMGlYKlD')
+    .then(function(data) {
+      console.log(data);
+      console.log("----------------------------------------");
+      return embed.render(data);
+    })
+    .then(function(html) {
+      console.log(html);
+      assert.typeOf(html, 'string');
+    });
+  });
+
   // it('Is able to fetch from reddit comment', function() {
   //   return embed.fetch('https://www.reddit.com/r/todayilearned/comments/4lbdfl/til_louis_armstrong_asked_richard_nixon_to_carry/')
   //   .then(function(data) {
