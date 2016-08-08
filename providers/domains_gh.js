@@ -63,7 +63,7 @@ module.exports = [
   Provider.extend({
     name: "graphiq",
     type: "rich",
-    uri: /\/\/.+?graphiq.com\/w\/(.+)/,
+    uri: /\/\/.+?graphiq.com\/(.+?)\/(.+)/,
     version: 0,
     fetch: function(uri) {
         console.log(uri);

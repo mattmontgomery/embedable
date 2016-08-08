@@ -92,7 +92,7 @@ describe('Fetch Method', function() {
     });
   });
   it('Is able to fetch from Graphiq', function() {
-    return embed.fetch('https://www.graphiq.com/w/eCrlBXn4c17')
+    return embed.fetch('https://www.graphiq.com/wlp/dkAYMGlYKlD')
     .then(function(data) {
       console.log(data);
       console.log("----------------------------------------");
