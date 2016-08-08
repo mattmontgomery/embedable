@@ -43,6 +43,26 @@ module.exports = [
   }),
 
   Provider.extend({
+    name: 'pollcaster',
+    type: 'rich',
+    uri: /pollcaster.com\/c\/poll\/([A-Za-z0-9\-]+)/,
+    script: '//dcc4iyjchzom0.cloudfront.net/widget/loader.js',
+    version: 0,
+    fetch: function(uri, values)  {
+       var requestUri = 'http://api.movementventures.com/polls/' + values[1];
+       return this.fetchUri(requestUri).then(function(resp) {
+           return resp.body;
+       }).then(function(body) {
+           return JSON.parse(body);
+       });
+    },
+    asEmbed: function(entry) {
+       var data = entry.data;
+       return entry.data.embed.script;
+    }
+  }),
+
+  Provider.extend({
     name: "polldaddy",
     type: "rich",
     uri: "polldaddy.com/",

@@ -23,14 +23,16 @@ module.exports = [
      script: '//dcc4iyjchzom0.cloudfront.net/widget/loader.js',
      version: 0,
      fetch: function(uri, values)  {
-         return this.fetchGraph(uri).then(function(data) {
-            return data;
+         var requestUri = 'http://api.movementventures.com/quizzes/' + values[1];
+         return this.fetchUri(requestUri).then(function(resp) {
+             return resp.body;
+         }).then(function(body) {
+             return JSON.parse(body);
          });
      },
      asEmbed: function(entry) {
          var data = entry.data;
-         return '<div class="quizz-container" data-width="100%"" data-height="auto" data-quiz="253072"></div>'
-           + this.asScript();
+         return entry.data.embed.script;
      }
   }),
 
