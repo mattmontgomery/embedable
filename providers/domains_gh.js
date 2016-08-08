@@ -66,7 +66,6 @@ module.exports = [
     uri: /\/\/.+?graphiq.com\/(.+?)\/(.+)/,
     version: 0,
     fetch: function(uri) {
-        console.log(uri);
       return this.fetchEmbed(uri, {
         api: "http://oembed.graphiq.com/services/oembed"
       });
