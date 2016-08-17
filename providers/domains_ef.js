@@ -230,62 +230,22 @@ module.exports = [
     }
   }),
 
-  // <div 
-  //   class="fb-comment-embed" 
-  //   data-href="https://www.facebook.com/sabornva/posts/10155047462202908?comment_id=10155049290027908" 
-  //   data-width="560" 
-  //   data-include-parent="false">
-  // </div>
-  // 
-  // <div 
-  //   class="fb-comment-embed" 
-  //   data-href="https://www.facebook.com/sabornva/posts/10155047462202908?comment_id=10155049290027908" 
-  //   data-width="100%" 
-  //   data-include-parent="false">
-  // </div>
-
-//   Provider.extend({
-//     name: 'facebook',
-//     type: 'rich',
-//     uri: 'facebook\\.com',
-//     version: 1,
-//     fetch: function(uri) {
-//       var href = uri
-//         , type = 'fb-post'
-//         , parts;
-
-//       // test if iframe plugin uri
-//       if ((/plugins/).test(uri) && (parts = uri.match(/href=([^&]+)/))) {
-//         href = decodeURIComponent(parts[1]);
-//       }
-//       // test if embedded comment
-//       if ((/comment/).test(href)) {
-//         type = 'fb-comment-embed';
-//       }
-//       return this.fetchGraph(href).then(function(data) {
-//         data.href = href;
-//         data.type = type;
-//         return data;
-//       });
-//     },
-//     script: '//connect.facebook.net/en_US/sdk.js#xfbml=1&version=v2.7',
-//     asEmbed: function(entry) {
-//       var uri = entry.data.href || entry.uri
-//         , type = entry.data.type || 'fb-post';
-
-// console.log("ENTRY", entry.data);
-// console.log("TYPE", type);
-
-//        // return '<iframe src="' + entry.uri + '" width="100%" height="161" '
-//        //  + 'style="border:none;overflow:hidden" scrolling="no" '
-//        //  + 'frameborder="0" allowTransparency="true"></iframe>';
-
-//       return '<div class="embed-wrap">'
-//         + '<div class="' + type + '" data-href="'
-//         + uri + '" data-width="100%" data-include-parent="false"></div></div>'
-//         + this.asScript();
-//     }
-//   }),
+  Provider.extend({
+    name: 'facebook',
+    type: 'rich',
+    uri: 'facebook\\.com',
+    version: 1,
+    fetch: function(uri) {
+      return this.fetchGraph(uri);
+    },
+    script: '//connect.facebook.net/en_US/sdk.js#xfbml=1&version=v2.7',
+    asEmbed: function(entry) {
+      return '<div class="embed-wrap">'
+        + '<div class="fb-post" data-href="'
+        + entry.uri + '" data-width="100%"></div></div>'
+        + this.asScript();
+    }
+  }),
 
   Provider.extend({
     name: 'flickr',
