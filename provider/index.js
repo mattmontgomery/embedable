@@ -280,8 +280,8 @@ _.extend(Provider.prototype, {
       , out = ''
       , tag, title, width, height, ratio;
 
-    // render embed tag
-    if (data.embed_src) {
+    // if embed_raw = true, then use embed_html instead
+    if (data.embed_src && !data.embed_raw) {
       tag = data.embed_tag || this.tag;
       title = data.embed_title || data.title;
 

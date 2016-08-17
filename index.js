@@ -79,7 +79,8 @@ _.extend(Embed.prototype, {
 
   addProvider: function(provider) {
     var name = provider.name
-      , self = this;
+      , self = this
+      , pattern = null;
 
     if (this.providers[name]) {
       throw new Error('Duplicate provider: ' + name);
@@ -93,13 +94,23 @@ _.extend(Embed.prototype, {
       provider.uri = [provider.uri];
     }
     _.each(provider.uri, function(uri) {
-      if (!_.isRegExp(uri)) {
-        uri = new RegExp(uri, "i");
+      if (typeof uri === 'function' && pattern) {
+        pattern.process = uri;
       }
-      self.patterns.push({
-        regex: uri,
-        provider: provider
-      });
+      else {
+        if (typeof uri === 'string') {
+          uri = new RegExp(uri, "i");
+        }
+        else if (!_.isRegExp(uri)) {
+          throw new Error('Invalid URI pattern: ' + uri + ' for ' + name);
+        }
+        pattern = {
+          regex: uri,
+          provider: provider,
+          process: null
+        };
+        self.patterns.push(pattern);
+      }
     });
   },
 
@@ -137,7 +148,7 @@ _.extend(Embed.prototype, {
       });
     }
     // resolve the provider promise
-    return this.fetchProvider(opts, pattern)
+    return this.fetchProvider(pattern)
       .then(function(data) {
 
         // handle default provider redirects
@@ -163,19 +174,40 @@ _.extend(Embed.prototype, {
   },
 
   findProvider: function(uri) {
-    for (var i = 0, l = this.patterns.length; i < l; i++) {
-      if (this.patterns[i].regex.test(uri)) {
-        return this.patterns[i];
+    var i, l, pattern, parts;
+
+    for (i = 0, l = this.patterns.length; i < l; i++) {
+      pattern = this.patterns[i];
+
+      if (pattern.regex.test(uri)) {
+        parts = uri.match(pattern.regex);
+
+        // if process, run parts through it
+        if (parts && pattern.process) {
+          parts = pattern.process(parts);
+        }
+        // if parts is string, use as uri and continue
+        if (typeof parts === 'string') {
+          uri = parts;
+        }
+        // return parts & provider
+        else {
+          return {
+            provider: pattern.provider,
+            parts: parts,
+            uri: uri
+          };
+        }
       }
     }
   },
 
-  fetchProvider: function(opts, pattern) {
-    var uri = opts.redirect || opts.uri
-      parts = uri.match(pattern.regex);
-
+  fetchProvider: function(pattern) {
     try {
-      data = pattern.provider.fetch(uri, parts);
+      data = pattern.provider.fetch(
+        pattern.uri, 
+        pattern.parts
+      );
     }
     catch (err) {
       return when.reject({
