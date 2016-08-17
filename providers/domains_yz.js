@@ -33,7 +33,7 @@ module.exports = [
     type: 'video',
     uri: [
       "//youtube\\.com/[^#?/]+#[^#?/]+/.+$",
-      /(youtube\.com|youtu\.be)\/(embed|index|profile|view_play_list|playlist|user|watch|v)\//,
+      /(youtube\.com|youtu\.be)\/(embed|index|profile|view_play_list|playlist|user|watch|v)/i
     ],
     version: 0,
     fetch: function(uri) {
