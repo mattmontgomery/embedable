@@ -292,6 +292,8 @@ _.extend(Provider.prototype, {
         ? Math.round((height / width) * 100)
         : 50;
 
+console.log("asEmbed", width, height, ratio);
+
       out = '<div class="' + this.prefix + '-embed" style="'
         + 'padding-bottom: ' + ratio
         + '%;"><' + tag

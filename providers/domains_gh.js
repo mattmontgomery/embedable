@@ -20,7 +20,7 @@ module.exports = [
     name: "giphy",
     type: "video",
     uri: "(giphy\.com|gph\.is)/.+",
-    version: 1,
+    version: 2,
     fetch: function(uri) {
       return this.fetchGraph(uri).then(function(data) {
         var photo = data.photo_url
@@ -31,6 +31,16 @@ module.exports = [
           ? ('//giphy.com/embed/' + id)
           : null;
 
+        // NOTE: For some reason the embed width & height they are providing
+        // us is not the correct aspect ratio. However, the photo_width &
+        // photo_height are... so we are using those for now. We may consider
+        // eliminating this at some point if they fix the problem.
+        if (data.photo_width) {
+          data.embed_width = data.photo_width;
+        }
+        if (data.photo_height) {
+          data.embed_height = data.photo_height;
+        }
         return data;
       });
     }
