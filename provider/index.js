@@ -161,6 +161,13 @@ _.extend(Provider.prototype, {
         + (style ? ' embed-' + style : '')
         + '">' + out + '</div>';
     }
+
+    if (opts.fbInstant) {
+      out = '<figure class="op-interactive"><iframe>'
+        + out
+        + '</iframe></figure>';
+    }
+
     return out;
   },
 
