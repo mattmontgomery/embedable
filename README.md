@@ -2,14 +2,18 @@
 
 Embed media via oEmbed or openGraph
 
+# Install
+
+`npm install ddm-embeddable`
+
 # Example of using the embedable code to fetch and render a uri
 
 ```javascript
 // Require the embedable library
-var Embedable = require('embedable');
+var Embeddable = require('ddm-embeddable');
 
 // Instantiate the embedable object
-var embed = Embedable();
+var embed = Embeddable();
 
 // Asynchronously fetch metadata for a URI
 var data = embed.fetch('https://www.youtube.com/watch?v=igUMDICqTpQ');
