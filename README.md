@@ -1,4 +1,4 @@
-# embedable
+# embeddable
 
 Embed media via oEmbed or openGraph
 
