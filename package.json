@@ -1,5 +1,5 @@
 {
-  "name": "embedable",
+  "name": "ddm-embeddable",
   "version": "1.0.21",
   "description": "Oembed and OpenGraph embeds for content",
   "main": "index.js",
@@ -8,7 +8,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/numinos1/embedable.git"
+    "url": "https://github.com/deseretdigital/embeddable.git"
   },
   "keywords": [
     "oembed",
@@ -19,9 +19,9 @@
   "author": "Andrew Bunker",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/numinos1/embedable/issues"
+    "url": "https://github.com/deseretdigital/embeddable/issues"
   },
-  "homepage": "https://github.com/numinos1/embedable",
+  "homepage": "https://github.com/deseretdigital/embeddable",
   "dependencies": {
     "htmlparser2": "^3.9.0",
     "lodash": "^3.10.1",
