@@ -4,7 +4,8 @@
   "description": "Oembed and OpenGraph embeds for content",
   "main": "index.js",
   "scripts": {
-    "test": "mocha test/index.js"
+    "test": "mocha test/index.js",
+    "test-youtube": "mocha test/youtube.js"
   },
   "repository": {
     "type": "git",
