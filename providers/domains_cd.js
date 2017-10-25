@@ -113,6 +113,18 @@ module.exports = [
   }),
 
   Provider.extend({
+    name: 'deseretnews',
+    type: 'rich',
+    uri: "//(?:[-\\w]+\\.)?deseretnews\\.com/.+$",
+    version: 0,    
+    fetch: function(uri) {
+      return this.fetchEmbed(uri, {
+        api: "http://www.deseretnews.com/services/oembed",
+      });
+    }
+  }),
+
+  Provider.extend({
     name: 'deviantart',
     type: 'photo',
     uri: [
