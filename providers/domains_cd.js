@@ -119,7 +119,7 @@ module.exports = [
     version: 0,    
     fetch: function(uri) {
       return this.fetchEmbed(uri, {
-        api: "http://www.deseretnews.com/services/oembed",
+        api: "https://www.deseretnews.com/services/oembed",
       });
     }
   }),
