@@ -115,7 +115,7 @@ module.exports = [
   Provider.extend({
     name: 'deseretnews',
     type: 'rich',
-    uri: "//(?:[-\\w]+\\.)?deseretnews\\.com/.+$",
+    uri: "//(?:[-\\w]+\\.)?deseretnews\\.com/quizlet/.+$",
     version: 0,    
     fetch: function(uri) {
       return this.fetchEmbed(uri, {
