@@ -70,7 +70,10 @@ module.exports = [
   Provider.extend({
     name: 'vimeo',
     type: "video",
-    uri: "//(www|player|)\\.vimeo\\.com/.+$",
+    uri: [
+      "//(www|player)\\.vimeo\\.com/.+$",
+      "//vimeo\\.com/.+$"
+    ],
     version: 0,
     fetch: function(uri) {
       return this.fetchEmbed(uri, {
