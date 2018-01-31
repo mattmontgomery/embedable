@@ -113,7 +113,7 @@ module.exports = [
   }),
 
   Provider.extend({
-    name: 'deseretnews',
+    name: 'deseretnews-quizlet',
     type: 'rich',
     uri: "//(?:[-\\w]+\\.)?deseretnews\\.com/quizlet/.+$",
     version: 0,    
