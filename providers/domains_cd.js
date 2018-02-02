@@ -113,10 +113,22 @@ module.exports = [
   }),
 
   Provider.extend({
-    name: 'deseretnews',
+    name: 'deseretnews-quizlet',
     type: 'rich',
     uri: "//(?:[-\\w]+\\.)?deseretnews\\.com/quizlet/.+$",
-    version: 0,    
+    version: 0,
+    fetch: function(uri) {
+      return this.fetchEmbed(uri, {
+        api: "https://www.deseretnews.com/services/oembed",
+      });
+    }
+  }),
+
+  Provider.extend({
+    name: 'deseretnews-ask',
+    type: 'rich',
+    uri: "amazonaws\\.com/ask\\.deseretnews.com/(\\w+)\\.html$",
+    version: 0,
     fetch: function(uri) {
       return this.fetchEmbed(uri, {
         api: "https://www.deseretnews.com/services/oembed",
