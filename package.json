@@ -24,6 +24,7 @@
   },
   "homepage": "https://github.com/deseretdigital/embeddable",
   "dependencies": {
+    "html-escape": "^2.0.0",
     "htmlparser2": "^3.9.0",
     "lodash": "^3.10.1",
     "request": "^2.74.0",
