@@ -33,23 +33,13 @@ module.exports = [
     type: 'video',
     uri: [
       "//youtube\\.com/[^#?/]+#[^#?/]+/.+$",
-      /(youtube\.com|youtu\.be)\/(embed|index|profile|view_play_list|playlist|user|watch|v)\//,
+      /(youtube\.com|youtu\.be)\/(embed|index|profile|view_play_list|playlist|user|watch|v)/i
     ],
     version: 0,
     fetch: function(uri) {
-      return this.fetchGraph(uri, {
-        paid: 'meta/paid',
-        channelId: 'meta/channelId',
-        videoId: 'meta/videoId',
-        duration: 'meta/duration',
-        unlisted: 'meta/unlisted',
-        playerType: 'meta/playerType',
-        isFamilyFriendly: 'meta/isFamilyFriendly',
-        interactionCount: 'meta/interactionCount',
-        datePublished: 'meta/datePublished',
-        genre: 'meta/genre'
-      });
+        return this.fetchEmbed(uri, {
+            api: 'https://www.youtube.com/oembed'
+        });
     }
   })
-
 ];

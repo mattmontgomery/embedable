@@ -1,4 +1,5 @@
 var _ = require('lodash')
+  , htmlEscape = require('html-escape')
   , when = require('when')
   , request = require('request')
   , toTag = require('./toTag')
@@ -161,6 +162,13 @@ _.extend(Provider.prototype, {
         + (style ? ' embed-' + style : '')
         + '">' + out + '</div>';
     }
+
+    if (opts.fbInstant) {
+      out = '<figure class="op-interactive"><iframe>'
+        + out
+        + '</iframe></figure>';
+    }
+
     return out;
   },
 
@@ -201,7 +209,7 @@ _.extend(Provider.prototype, {
 
   asTitle: function(entry, opts) {
     var data = entry.data
-      , title = opts.title || data.title || ''
+      , title = htmlEscape(opts.title || data.title || '')
       , credit = this.asCredit(entry, opts) || '';
 
     if (!credit && !title) {
@@ -244,7 +252,7 @@ _.extend(Provider.prototype, {
 
     return this.toTag('a', {
       'href': entry.uri,
-    }, opts.title || data.title || entry.uri);
+  }, htmlEscape(opts.title) || htmlEscape(data.title) || entry.uri);
   },
 
   /**
@@ -261,7 +269,7 @@ _.extend(Provider.prototype, {
     }
     return this.toTag('img', {
       'src': data.photo_url,
-      'alt': opts.title || data.title,
+      'alt': htmlEscape(opts.title || data.title),
       'width': opts.width || '100%',
       'height': opts.height || 'auto',
       'class': 'embed-photo'
@@ -280,10 +288,10 @@ _.extend(Provider.prototype, {
       , out = ''
       , tag, title, width, height, ratio;
 
-    // render embed tag
-    if (data.embed_src) {
+    // if embed_raw = true, then use embed_html instead
+    if (data.embed_src && !data.embed_raw) {
       tag = data.embed_tag || this.tag;
-      title = data.embed_title || data.title;
+      title = htmlEscape(data.embed_title || data.title);
 
       width = parseInt(opts.width || data.embed_width, 10) || 0;
       height = parseInt(opts.height || data.embed_height, 10) || 0;
